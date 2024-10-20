@@ -2,6 +2,7 @@ from sklearn.preprocessing import StandardScaler
 from keras._tf_keras.keras.models import load_model
 import pandas as pd
 
+
 # Load the pre-trained model
 model = load_model('stu_model.keras')
 
@@ -35,7 +36,6 @@ def get_user_input():
     Previous_Scores = float(input("Enter Previous_Scores: "))
     Tutoring_Sessions = int(input("Enter number of Tutoring_Sessions: "))
     Physical_Activity =  int(input("Enter number of Physical_Activity: "))
-    # Exam_Score = float(input("Enter previous grade 2 (G2): "))
     return [Hours_Studied, Attendance, Sleep_Hours, Previous_Scores, Tutoring_Sessions, Physical_Activity]
 
 
