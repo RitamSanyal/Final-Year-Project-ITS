@@ -30,12 +30,12 @@ def get_user_input():
     print("\t" + "*" + " " * 48 + "*")
     print("\t" + "*" * 50)
     print("\n")
-    Hours_Studied = float(input("Enter study time: "))
-    Attendance = int(input("Enter number of Attendance: "))
-    Sleep_Hours = int(input("Enter number of Sleep_Hours: "))
-    Previous_Scores = float(input("Enter Previous_Scores: "))
-    Tutoring_Sessions = int(input("Enter number of Tutoring_Sessions: "))
-    Physical_Activity =  int(input("Enter number of Physical_Activity: "))
+    Hours_Studied = float(input("Enter study time in hours per week: "))
+    Attendance = int(input("Enter Attendance in percentage: "))
+    Sleep_Hours = int(input("Enter Sleep Hours per day: "))
+    Previous_Scores = float(input("Enter Previous Exam Score: "))
+    Tutoring_Sessions = int(input("Enter number of Tutoring_Sessions per month: "))
+    Physical_Activity =  int(input("Enter Physical Activity in hours per week: "))
     return [Hours_Studied, Attendance, Sleep_Hours, Previous_Scores, Tutoring_Sessions, Physical_Activity]
 
 
