@@ -75,13 +75,14 @@ router.post('/login', passport.authenticate('local'), async (req, res) => {
 router.get('/logout', (req, res) => {
   req.logout(err => {
     if (err) return res.status(500).json({ error: 'Failed to log out' });
+    return res.redirect("/");
     res.status(200).json({ message: 'Logged out successfully' });
   });
 });
 
 // Route to render the stream selection page with checkStreamSelected middleware
 router.get('/select-stream', ensureAuthenticated, checkStreamSelected, (req, res) => {
-  res.sendFile(path.join(__dirname, '../public/html/index.html'));
+  res.sendFile(path.join(__dirname, '../public/html/select-stream.html'));
 });
 
 // Select stream route
@@ -108,34 +109,47 @@ router.post('/select-stream', async (req, res) => {
   }
 });
 
+// Route to render the update stream page
+router.get('/update-stream', ensureAuthenticated, async (req, res) => {
+  res.sendFile(path.join(__dirname, '../public/html/update-stream.html'));
+});
 
 // Update stream route
 router.put('/update-stream', async (req, res) => {
   try {
     if (!req.isAuthenticated()) {
+      // Return error in JSON format if user is not authenticated
       return res.status(401).json({ error: 'User not authenticated' });
     }
 
     const userId = req.user._id;
     const { stream_choice } = req.body;
 
-    const existingSelection = await StreamSelection.findOne({ user_id: userId });
+    // Check if the user has an existing stream selection
+    let existingSelection = await StreamSelection.findOne({ user_id: userId });
 
     if (!existingSelection) {
-      return res.status(404).json({ error: 'No stream selection found to update' });
+      // If no stream selection found, create a new selection for the user
+      existingSelection = await StreamSelection.create({
+        user_id: userId,
+        stream_choice: stream_choice
+      });
+      return res.status(200).json({ message: 'Stream selection created', selection: existingSelection });
     }
 
+    // If a stream selection exists, update it with the new stream choice
     existingSelection.stream_choice = stream_choice;
     await existingSelection.save();
 
+    // Send response back with the updated stream selection
     res.status(200).json({ message: 'Stream selection updated', selection: existingSelection });
   } catch (error) {
     console.error(error);
+    // Send server error in JSON format if any issues occur
     res.status(500).json({ error: 'An error occurred while updating stream selection' });
   }
 });
 
-// Profile route
 // Profile route
 router.get('/profile', ensureAuthenticated, async (req, res) => {
   try {

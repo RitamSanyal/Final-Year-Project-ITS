@@ -13,10 +13,11 @@ document.getElementById('streamForm').addEventListener('submit', async function 
         });
 
         if (response.ok) {
-            alert('Stream selection saved successfully!');
-            // Redirect or perform any action you want after successful selection
+            // Redirect to the profile page upon successful stream selection
+            window.location.href = '/profile';
         } else {
-            alert('Failed to save stream selection. Please try again.');
+            const errorData = await response.json();
+            alert(`Failed to save stream selection: ${errorData.error || "Please try again."}`);
         }
     } catch (error) {
         console.error('Error:', error);
