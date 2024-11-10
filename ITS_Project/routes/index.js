@@ -111,7 +111,19 @@ router.post('/select-stream', async (req, res) => {
 
 // Route to render the update stream page
 router.get('/update-stream', ensureAuthenticated, async (req, res) => {
-  res.sendFile(path.join(__dirname, '../public/html/update-stream.html'));
+  try {
+    const user = await User.findById(req.user.id);
+    const streamSelection = await StreamSelection.findOne({ user_id: req.user.id });
+
+    // Set currentStream to the selected stream or a default value if none found
+    const currentStream = streamSelection ? streamSelection.stream_choice : '';
+
+    // Render the update-stream.ejs page and pass currentStream data
+    res.render('update-stream', { currentStream });
+  } catch (error) {
+    console.error('Error fetching current stream:', error);
+    res.status(500).json({ message: 'Server error while fetching stream data' });
+  }
 });
 
 // Update stream route
