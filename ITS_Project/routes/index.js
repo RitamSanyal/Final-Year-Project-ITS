@@ -168,6 +168,30 @@ router.get('/profile', ensureAuthenticated, async (req, res) => {
   }
 });
 
+// Delete user route
+router.delete('/delete-user', ensureAuthenticated, async (req, res) => {
+  try {
+    const userId = req.user._id;
+
+    // Delete user from the User collection
+    await User.findByIdAndDelete(userId);
+
+    // Optionally, delete the user's stream selection if it exists
+    await StreamSelection.deleteMany({ user_id: userId });
+
+    // Log out the user after deletion and send a success message
+    req.logout(err => {
+      if (err) return res.status(500).json({ error: 'Failed to log out' });
+      res.status(200).json({ message: 'User deleted successfully and logged out' });
+    });
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'An error occurred while deleting the user' });
+  }
+});
+
+
 // Middleware to ensure user is authenticated
 function ensureAuthenticated(req, res, next) {
   if (req.isAuthenticated()) return next();
