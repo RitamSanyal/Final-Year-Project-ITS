@@ -13,7 +13,7 @@ require('dotenv').config();
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 const connectDB = require('./config/db');
-const User = require('./models/User'); // Import User model
+const User = require('./models/User_Schema'); // Import User model
 
 connectDB();
 

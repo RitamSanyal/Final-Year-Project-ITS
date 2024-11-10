@@ -1,8 +1,8 @@
 var express = require('express');
 var router = express.Router();
 const passport = require('passport');
-const User = require('../models/User');
-const StreamSelection = require('../models/StreamSelection');
+const User = require('../models/User_Schema');
+const StreamSelection = require('../models/StreamSelection_Schema');
 const path = require('path');
 
 // Middleware to check if the user has already selected a stream

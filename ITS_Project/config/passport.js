@@ -1,5 +1,5 @@
 const LocalStrategy = require('passport-local').Strategy;
-const User = require('../models/User');
+const User = require('../models/User_Schema');
 
 module.exports = function (passport) {
     passport.use(new LocalStrategy(async (username, password, done) => {

@@ -11,10 +11,24 @@
 
 <body>
     <div class="container mt-5">
-        <h1>Profile Page</h1>
-        <a href="/logout" class="btn btn-outline-warning mt-2">Logout</a>
-        <a href="/update-stream" class="btn btn-outline-primary mt-2">Update Stream</a>
-        <button class="btn btn-outline-danger mt-2" data-bs-toggle="modal" data-bs-target="#deleteAccountModal">Delete Account</button>
+        <div class="card mx-auto shadow-lg" style="max-width: 500px;">
+            <div class="card-body text-center">
+                <h3 class="card-title mb-4">Welcome, <%= user.username %>!</h3>
+                <p class="text-muted">Here is your current profile information:</p>
+
+                <h5 class="text-primary">Current Stream</h5>
+                <p class="lead mb-4">
+                    <%= streamChoice %>
+                </p>
+
+                <div class="d-grid gap-2 d-sm-flex justify-content-center">
+                    <a href="/logout" class="btn btn-warning">Logout</a>
+                    <a href="/update-stream" class="btn btn-primary">Update Stream</a>
+                    <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteAccountModal">Delete
+                        Account</button>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- Modal for Delete Account Confirmation -->
@@ -49,7 +63,7 @@
         const confirmDeleteButton = document.getElementById('confirmDeleteButton');
 
         confirmationInput.addEventListener('input', () => {
-            confirmDeleteButton.disabled = confirmationInput.value.toLowerCase() !== 'confirm';
+            confirmDeleteButton.disabled = confirmationInput.value !== 'confirm';
         });
 
         confirmDeleteButton.addEventListener('click', async () => {
