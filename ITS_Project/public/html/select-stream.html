@@ -11,7 +11,7 @@
 
 <body>
     <div class="container mt-5">
-        <div class="card">
+        <div class="card shadow-sm">
             <div class="card-header text-center">
                 <h2>Select Your Stream</h2>
             </div>
@@ -19,11 +19,12 @@
                 <form id="streamForm">
                     <div class="mb-3">
                         <label for="streamChoice" class="form-label">Choose Stream</label>
-                        <select id="streamChoice" class="form-select" required>
+                        <select id="streamChoice" class="form-select mb-3" required>
                             <option selected disabled value="">Select your stream</option>
-                            <option value="IT">Information Technology</option>
-                            <option value="CSE">Computer Science & Engineering</option>
+                            <option value="IT">Inforamtion Technology</option>
+                            <option value="CSE">Computer Science Engineering</option>
                             <option value="ECE">Electronics & Communication Engineering</option>
+                            <option value="CSE">Mechanical Engineering</option>
                         </select>
                     </div>
                     <button type="submit" class="btn btn-primary w-100">Submit</button>
