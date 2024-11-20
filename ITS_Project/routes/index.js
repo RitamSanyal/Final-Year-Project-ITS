@@ -3,6 +3,7 @@ var router = express.Router();
 const passport = require('passport');
 const User = require('../models/User_Schema');
 const StreamSelection = require('../models/StreamSelection_Schema');
+const MCQ = require('../models/MCQ_Schema');
 const path = require('path');
 
 // Middleware to check if the user has already selected a stream
@@ -208,5 +209,55 @@ function ensureAuthenticated(req, res, next) {
   if (req.isAuthenticated()) return next();
   res.status(401).json({ message: 'Please log in to access this resource' });
 }
+
+// MCQ Quiz page route
+router.get('/mcq-quiz', ensureAuthenticated, async (req, res) => {
+  res.render('mcq-test');
+});
+
+// API route to get MCQ questions based on user's stream
+router.get('/api/mcq/questions', ensureAuthenticated, async (req, res) => {
+  console.log('User authenticated:', req.user); // Log user info
+  try {
+    const streamSelection = await StreamSelection.findOne({ user_id: req.user.id });
+    console.log('Stream selection:', streamSelection); // Log stream selection data
+
+    if (!streamSelection) {
+      return res.status(404).json({ message: 'Stream not selected' });
+    }
+
+    const questions = await MCQ.find({ stream: streamSelection.stream_choice })
+      .limit(10);
+    console.log('Questions:', questions); // Log the fetched questions
+
+    if (questions.length === 0) {
+      return res.status(404).json({ message: 'No questions found for the selected stream' });
+    }
+
+    res.json(questions);
+  } catch (error) {
+    console.error('Error fetching questions:', error);
+    res.status(500).json({ message: 'Error fetching questions' });
+  }
+});
+
+// API route to submit answers and get results
+router.post('/api/mcq/submit', ensureAuthenticated, async (req, res) => {
+  try {
+    const { questionId, answer } = req.body;
+    const question = await MCQ.findById(questionId);
+
+    if (!question) {
+      return res.status(404).json({ message: 'Question not found' });
+    }
+
+    const isCorrect = question.correctAnswer === answer;
+    res.json({ correct: isCorrect });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Error submitting answer' });
+  }
+});
+
 
 module.exports = router;
