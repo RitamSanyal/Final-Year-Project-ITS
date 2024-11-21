@@ -216,7 +216,7 @@ router.get('/mcq-quiz', ensureAuthenticated, async (req, res) => {
 });
 
 // API route to get MCQ questions based on user's stream
-router.get('/api/mcq/questions', ensureAuthenticated, async (req, res) => {
+router.get('/api/mcqs/question', ensureAuthenticated, async (req, res) => {
   console.log('User authenticated:', req.user); // Log user info
   try {
     const streamSelection = await StreamSelection.findOne({ user_id: req.user.id });
@@ -226,15 +226,15 @@ router.get('/api/mcq/questions', ensureAuthenticated, async (req, res) => {
       return res.status(404).json({ message: 'Stream not selected' });
     }
 
-    const questions = await MCQ.find({ stream: streamSelection.stream_choice })
+    const question = await MCQ.find({ stream: streamSelection.stream_choice })
       .limit(10);
-    console.log('Questions:', questions); // Log the fetched questions
+    console.log('Questions:', question); // Log the fetched questions
 
-    if (questions.length === 0) {
+    if (question.length === 0) {
       return res.status(404).json({ message: 'No questions found for the selected stream' });
     }
 
-    res.json(questions);
+    res.json(question);
   } catch (error) {
     console.error('Error fetching questions:', error);
     res.status(500).json({ message: 'Error fetching questions' });
@@ -242,7 +242,7 @@ router.get('/api/mcq/questions', ensureAuthenticated, async (req, res) => {
 });
 
 // API route to submit answers and get results
-router.post('/api/mcq/submit', ensureAuthenticated, async (req, res) => {
+router.post('/api/mcqs/submit', ensureAuthenticated, async (req, res) => {
   try {
     const { questionId, answer } = req.body;
     const question = await MCQ.findById(questionId);

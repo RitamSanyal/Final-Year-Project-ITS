@@ -49,7 +49,7 @@
         // Fetch questions from the backend
         async function fetchQuestions() {
             try {
-                const response = await fetch('/api/mcq/questions'); // Adjust this route to match your backend
+                const response = await fetch('/api/mcqs/question'); // Adjust this route to match your backend
                 if (!response.ok) throw new Error('Failed to fetch questions');
                 questions = await response.json();
                 if (questions.length > 0) {
@@ -101,7 +101,7 @@
                     }
                 });
 
-                const response = await fetch('/api/submit-answers', {
+                const response = await fetch('/api/mcqs/submit', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(answers),
