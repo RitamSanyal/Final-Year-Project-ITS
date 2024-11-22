@@ -248,20 +248,38 @@ router.get('/api/mcqs/question', ensureAuthenticated, async (req, res) => {
 // API route to submit answers and get results
 router.post('/api/mcqs/submit', ensureAuthenticated, async (req, res) => {
   try {
-    const { questionId, answer } = req.body;
-    const question = await MCQ.findById(questionId);
+    const { answers } = req.body; // Array of { questionId, answer }
+    console.log('Received answers:', answers);
 
-    if (!question) {
-      return res.status(404).json({ message: 'Question not found' });
+    if (!answers || !Array.isArray(answers)) {
+      return res.status(400).json({ message: 'Invalid data format' });
     }
 
-    const isCorrect = question.correctAnswer === answer;
-    res.json({ correct: isCorrect });
+    let correctCount = 0;
+
+    for (const { questionId, answer } of answers) {
+      const question = await MCQ.findById(questionId);
+      if (!question) {
+        console.log(`Question not found: ${questionId}`);
+        continue;
+      }
+
+      // Compare the submitted answer index with the correctAnswer index
+      if (question.correctAnswer === answer) {
+        correctCount++;
+      }
+    }
+
+    const totalQuestions = answers.length;
+    res.json({
+      message: `You answered ${correctCount} out of ${totalQuestions} questions correctly.`,
+      correctCount,
+      totalQuestions,
+    });
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Error submitting answer' });
+    console.error('Error processing submission:', error);
+    res.status(500).json({ message: 'Error submitting answers' });
   }
 });
-
 
 module.exports = router;

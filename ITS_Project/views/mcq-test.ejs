@@ -43,6 +43,7 @@
         const nextBtn = document.getElementById('next-btn');
         const submitBtn = document.getElementById('submit-btn');
 
+        let selectedAnswers = {}; // Object to keep track of selected answers
         let questions = [];
         let currentQuestionIndex = 0;
 
@@ -66,22 +67,34 @@
 
         // Render the current question
         function renderQuestion(index) {
-                const question = questions[index];
-                questionText.textContent = question.question; // Use 'question', not 'text'
-                optionsArea.innerHTML = '';
+            const question = questions[index];
+            questionText.textContent = question.question;
+            optionsArea.innerHTML = '';
 
-                question.options.forEach((option, i) => {
-                    const optionElement = document.createElement('div');
-                    optionElement.className = 'form-check';
-                    optionElement.innerHTML = `
-                        <input class="form-check-input" type="radio" name="question-${question._id}" id="option-${i}" value="${option}">
-                        <label class="form-check-label" for="option-${i}">
-                        ${option}
-                        </label>
-                    `;
-                    optionsArea.appendChild(optionElement);
+            question.options.forEach((option, i) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'form-check';
+                optionElement.innerHTML = `
+            <input 
+                class="form-check-input" 
+                type="radio" 
+                name="question-${question._id}" 
+                id="option-${i}" 
+                value="${i}" 
+                ${selectedAnswers[question._id] === i ? 'checked' : ''}>
+            <label class="form-check-label" for="option-${i}">
+                ${option}
+            </label>
+        `;
+
+                // Add change event listener to update selectedAnswers
+                optionElement.querySelector('input').addEventListener('change', (e) => {
+                    selectedAnswers[question._id] = parseInt(e.target.value, 10); // Store answer index
                 });
-            }
+
+                optionsArea.appendChild(optionElement);
+            });
+        }
 
         // Update button visibility and state
         function updateButtons() {
@@ -93,18 +106,17 @@
         // Submit answers to the backend
         async function submitAnswers() {
             try {
-                const answers = {};
-                questions.forEach((question) => {
-                    const selectedOption = document.querySelector(`input[name="question-${question.id}"]:checked`);
-                    if (selectedOption) {
-                        answers[question.id] = selectedOption.value;
-                    }
-                });
+                const answers = Object.entries(selectedAnswers).map(([questionId, answer]) => ({
+                    questionId,
+                    answer,
+                }));
+
+                console.log('Submitted answers:', answers); // Debugging: Log the submitted answers
 
                 const response = await fetch('/api/mcqs/submit', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(answers),
+                    body: JSON.stringify({ answers }),
                 });
 
                 if (response.ok) {
