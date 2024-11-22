@@ -1,94 +1,170 @@
-<!doctype html>
+
+<!-- <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Login & Register</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-  <style>
-    /* Center the card and adjust the width */
-    .auth-card {
-      max-width: 400px;
-      /* Adjusted width for a smaller card */
-      margin: 0 auto;
-    }
-
-    /* Customize unselected tab color */
-    .nav-tabs .nav-link {
-      color: lightgray;
-      /* Light gray for unselected tabs */
-    }
-
-    .nav-tabs .nav-link.active {
-      color: black;
-      /* Keep selected tab color as black */
-    }
-  </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Stream Selector</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="./styles/global.css" rel="stylesheet">
+  <link href="./styles/theme.css" rel="stylesheet">
 </head>
-
 <body>
-  <div class="container mt-5">
-    <div class="card shadow-sm auth-card">
-      <div class="card-header text-center">
-        <h2>Welcome</h2>
-        <p class="text-muted">Please login or register</p>
-      </div>
-      <div class="card-body">
-        <!-- Tabs for Login and Register -->
-        <ul class="nav nav-tabs" id="authTabs" role="tablist">
-          <li class="nav-item" role="presentation">
-            <button class="nav-link active" id="login-tab" data-bs-toggle="tab" data-bs-target="#login" type="button"
-              role="tab" aria-controls="login" aria-selected="true">Login</button>
-          </li>
-          <li class="nav-item" role="presentation">
-            <button class="nav-link" id="register-tab" data-bs-toggle="tab" data-bs-target="#register" type="button"
-              role="tab" aria-controls="register" aria-selected="false">Register</button>
-          </li>
-        </ul>
-
-        <div class="tab-content mt-4" id="authTabsContent">
-          <!-- Login Form -->
-          <div class="tab-pane fade show active" id="login" role="tabpanel" aria-labelledby="login-tab">
-            <form action="/login" method="post">
-              <div class="mb-3">
-                <label for="loginUsername" class="form-label">Username</label>
-                <input name="username" type="text" class="form-control" id="loginUsername" required>
-              </div>
-              <div class="mb-3">
-                <label for="loginPassword" class="form-label">Password</label>
-                <input name="password" type="password" class="form-control" id="loginPassword" required>
-              </div>
-              <button type="submit" class="btn btn-primary w-100">Login</button>
-            </form>
-          </div>
-
-          <!-- Register Form -->
-          <div class="tab-pane fade" id="register" role="tabpanel" aria-labelledby="register-tab">
-            <form action="/register" method="post">
-              <div class="mb-3">
-                <label for="registerUsername" class="form-label">Username</label>
-                <input name="username" type="text" class="form-control" id="registerUsername" required>
-              </div>
-              <div class="mb-3">
-                <label for="registerPassword" class="form-label">Password</label>
-                <input name="password" type="password" class="form-control" id="registerPassword" required>
-              </div>
-              <button type="submit" class="btn btn-success w-100">Register</button>
-            </form>
-          </div>
-        </div>
-      </div>
-      <div class="card-footer text-center text-muted">
-        &copy; 2024 Your Website Name
-      </div>
-    </div>
-  </div>
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-    crossorigin="anonymous"></script>
+  <div id="root">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellat inventore voluptas dolorum nam, quae quisquam! Molestias aut distinctio eum sapiente amet necessitatibus unde quia enim ut, blanditiis, veniam autem consectetur.</div>
+  <a href="" class="btn btn-danger">ABC</a>+
 </body>
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduStream</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .hero-section {
+            background-color: #eaf7ff;
+            text-align: center;
+            padding: 50px 20px;
+        }
+        .hero-section h1 {
+            font-size: 2.5rem;
+            font-weight: bold;
+        }
+        .card-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+        .footer {
+            background-color: #0d084d;
+            color: white;
+            text-align: center;
+            padding: 15px 0;
+        }
+        .footer a {
+            color: white;
+            margin: 0 10px;
+            text-decoration: none;
+        }
+        .stream-images img {
+            height: 150px;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
 
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container">
+      <a class="navbar-brand" href="#">
+          <img src="logo.png" alt="Logo" style="width: 40px; height: 40px; margin-right: 10px;"> EduStream
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+          <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+              <!-- <li class="nav-item"><a class="nav-link" href="register.html">Register</a></li> -->
+              <li class="nav-item"><a class="nav-link" href="/index">Login</a></li>
+              <!-- <li class="nav-item"><a class="nav-link" href="stream-section.html">Stream Section</a></li> -->
+          </ul>
+      </div>
+  </div>
+</nav>
+
+<!-- Hero Section -->
+<div class="hero-section">
+    <h1>Welcome to EduStream</h1>
+    <p>Your journey to knowledge starts here!</p>
+    <a href="#" class="btn btn-primary">Get Started</a>
+</div>
+
+<!-- Why Choose Us Section -->
+<div class="container text-center my-5">
+    <h2>Why Choose EduStream?</h2>
+    <div class="row mt-4">
+        <div class="col-md-4">
+            <div class="card border-0">
+                <img src="https://via.placeholder.com/300" class="card-img-top" alt="Expert Mentors">
+                <div class="card-body">
+                    <h5 class="card-title">Expert Mentors</h5>
+                    <p class="card-text">Learn from the best with personalized mentorship.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card border-0">
+                <img src="https://via.placeholder.com/300" class="card-img-top" alt="Certification Programs">
+                <div class="card-body">
+                    <h5 class="card-title">Certification Programs</h5>
+                    <p class="card-text">Get industry-recognized certifications to boost your career.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card border-0">
+                <img src="https://via.placeholder.com/300" class="card-img-top" alt="Diverse Streams">
+                <div class="card-body">
+                    <h5 class="card-title">Diverse Streams</h5>
+                    <p class="card-text">Choose from a wide range of streams and specializations.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Stream Section -->
+<div class="container text-center my-5">
+    <h2>Explore Our Streams</h2>
+    <div class="row mt-4">
+        <div class="col-md-2">
+            <div class="stream-images">
+                <img src="https://via.placeholder.com/150" class="img-fluid" alt="IT">
+                <p>IT</p>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="stream-images">
+                <img src="https://via.placeholder.com/150" class="img-fluid" alt="CSE">
+                <p>CSE</p>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="stream-images">
+                <img src="https://via.placeholder.com/150" class="img-fluid" alt="ECE">
+                <p>ECE</p>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="stream-images">
+                <img src="https://via.placeholder.com/150" class="img-fluid" alt="Mechanical">
+                <p>Mechanical</p>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="stream-images">
+                <img src="https://via.placeholder.com/150" class="img-fluid" alt="Civil">
+                <p>Civil</p>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="stream-images">
+                <img src="https://via.placeholder.com/150" class="img-fluid" alt="EE">
+                <p>EE</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<div class="footer">
+    <p>&copy; 2024 EduStream. All rights reserved.</p>
+    <a href="#">Twitter</a>
+    <a href="#">Facebook</a>
+    <a href="#">Instagram</a>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
 </html>
