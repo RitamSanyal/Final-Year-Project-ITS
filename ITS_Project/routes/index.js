@@ -36,6 +36,10 @@ router.get('/', function (req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
+router.get('/index', function (req, res, next) {
+  res.render('loginlogout', { title: 'Express' });
+});
+
 // Register route
 router.post('/register', async (req, res) => {
   const { username, password } = req.body;
