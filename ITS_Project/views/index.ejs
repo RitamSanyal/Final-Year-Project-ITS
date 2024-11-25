@@ -51,12 +51,13 @@
 
     <!-- <img src="images/middlesection.png" alt="section" class="middlesection"> -->
 
+
     <!-- Why Choose Us Section -->
     <div class="container text-center my-5 ">
         <div class="photo">
             <!-- <hr> -->
             <br>
-            <h2 class="sectionnameone ">
+            <h2 class="sectionnameone explore-text">
                 <!-- <img src="images/whychoose.png" class="whychoose " alt="Logo"> -->
                 Why Choose <b>EduStream</b>?
             </h2>
@@ -66,7 +67,7 @@
         <div class="row mt-4 firstsection">
             <div class="col-md-4 ">
                 <div class="card border-0 sectiononeimages one">
-                    <a href="/Choosecause/Expertmentors.html">
+                    <a href="/Choosecause/Expertmentors.html" target="_blank" rel="noopener noreferrer">
                         <img src="images/mentor.jpg" class="card-img-top Mentors" alt="Expert Mentors">
 
                         <div class="card-body">
@@ -79,7 +80,7 @@
             </div>
             <div class="col-md-4">
                 <div class="card border-0 sectiononeimages one">
-                    <a href="/Choosecause/Certificationprograms.html">
+                    <a href="/Choosecause/Certificationprograms.html" target="_blank" rel="noopener noreferrer">
                         <img src="images/certificate.jpg" class="card-img-top certificate" alt="Certification Programs">
                         <div class="card-body">
                             <h5 class="card-title firstsectionheading">Certification Programs</h5>
@@ -90,9 +91,8 @@
 
                 </div>
             </div>
-            <div class="col-md-4">
                 <div class="card border-0 sectiononeimages three">
-                    <a href="/Choosecause/Diversestreams.html">
+                    <a href="/Choosecause/Diversestreams.html" target="_blank" rel="noopener noreferrer">
                         <img src="images/stream.jpg" class="card-img-top stream" alt="Diverse Streams">
                         <div class="card-body">
                             <h5 class="card-title firstsectionheading">Diverse Streams</h5>
@@ -109,14 +109,16 @@
     <!-- Stream Section -->
     <div class="container text-center my-5 ">
         <hr>
-        <h2 class="sectionnametwo"><img src="images/explore.png" class="explorestream" alt="Logo"> Explore Our
+
+        <h2 class="sectionnametwo explore-text"><img src="images/explore.png" class="explorestream" alt="Logo"> Explore
+            Our
             <b>Streams</b>
         </h2>
         <hr>
-        <div class="row mt-4 ">
+        <div class="row mt-4 secondtextpart ">
             <div class="col-md-2 ">
                 <div class="stream-images">
-                    <a href="/streamtext/it.html">
+                    <a href="/streamtext/it.html" target="_blank" rel="noopener noreferrer">
                         <img src="images/IT.gif" class="img-fluid it" alt="IT">
                         <p class="streamhead"><b>IT</b></p>
                         <p class="subparaofcourse">IT is the backbone of modern innovation, driving efficiency,
@@ -127,8 +129,8 @@
             </div>
             <div class="col-md-2">
                 <div class="stream-images">
-                    <a href="/streamtext/cse.html">
-                        <img src="images/cse.gif" class="img-fluid" alt="CSE">
+                    <a href="/streamtext/cse.html" target="_blank" rel="noopener noreferrer">
+                        <img src="images/CSE.gif" class="img-fluid" alt="CSE">
                         <p class="streamhead"><b>CSE</b></p>
                         <p class="subparaofcourse">CSE is the study of the theory, experimentation, and engineering of
                             computer systems and
@@ -138,7 +140,7 @@
             </div>
             <div class="col-md-2">
                 <div class="stream-images">
-                    <a href="/streamtext/ece.html">
+                    <a href="/streamtext/ece.html" target="_blank" rel="noopener noreferrer">
                         <img src="images/ece.gif" class="img-fluid" alt="ECE">
                         <p class="streamhead"><b>ECE</b></p>
                         <p class="subparaofcourse">ECE deals with the study and
@@ -150,7 +152,7 @@
             </div>
             <div class="col-md-2 ">
                 <div class="stream-images">
-                    <a href="/streamtext/me.html">
+                    <a href="/streamtext/me.html" target="_blank" rel="noopener noreferrer">
                         <img src="images/me.gif" class="img-fluid" alt="ME">
                         <p class="streamhead"><b>ME</b></p>
                         <p class="subparaofcourse">Mechanical is the designing, analyzing systems that harness
@@ -184,6 +186,26 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-on-scroll');
+                } else {
+                    entry.target.classList.remove('animate-on-scroll');
+                }
+            });
+        }, { threshold: 0.5 });
+
+        const targets = document.querySelectorAll('.sectionnametwo, .sectionnameone, .card, .getstarted, .secondtextpart');
+        targets.forEach(target => {
+            observer.observe(target);
+        });
+
+
+    </script>
+    
 </body>
 
 </html>
