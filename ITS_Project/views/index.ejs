@@ -57,7 +57,7 @@
         <div class="photo">
             <!-- <hr> -->
             <br>
-            <h2 class="sectionnameone ">
+            <h2 class="sectionnameone explore-text">
                 <!-- <img src="images/whychoose.png" class="whychoose " alt="Logo"> -->
                 Why Choose <b>EduStream</b>?
             </h2>
@@ -110,17 +110,13 @@
     <!-- Stream Section -->
     <div class="container text-center my-5 ">
         <hr>
-        <!-- <h2 class="sectionnametwo explore-text"><img src="images/explore.png" class="explorestream " alt="Logo"> Explore
-            Our
-            <b>Streams</b>
-        </h2> -->
 
         <h2 class="sectionnametwo explore-text"><img src="images/explore.png" class="explorestream" alt="Logo"> Explore
             Our
             <b>Streams</b>
         </h2>
         <hr>
-        <div class="row mt-4 ">
+        <div class="row mt-4 secondtextpart ">
             <div class="col-md-2 ">
                 <div class="stream-images">
                     <a href="/streamtext/it.html" target="_blank" rel="noopener noreferrer">
@@ -203,8 +199,11 @@
             });
         }, { threshold: 0.5 });
 
-        const target = document.querySelector('.sectionnametwo');
-        observer.observe(target);
+        const targets = document.querySelectorAll('.sectionnametwo, .sectionnameone, .card, .getstarted, .secondtextpart');
+        targets.forEach(target => {
+            observer.observe(target);
+        });
+
 
     </script>
 

@@ -358,7 +358,32 @@ html {
     opacity: 0;
 }
 
-.sectionnametwo {
+.sectionnametwo,
+.sectionnameone,
+.card,
+.getstarted,
+.secondtextpart {
     opacity: 0;
     transition: opacity 0.3s ease-in-out;
+}
+
+
+@keyframes boxShadowBlink {
+    0% {
+        opacity: 0.9;
+    }
+
+    50% {
+
+        opacity: 0.6;
+    }
+
+    100% {
+
+        opacity: 1;
+    }
+}
+
+.yourjourney {
+    animation: boxShadowBlink 1.40s infinite;
 }
