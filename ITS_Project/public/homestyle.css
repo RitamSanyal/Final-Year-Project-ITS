@@ -293,22 +293,6 @@ a:active {
     }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 .streamhead {
     color: #06b700;
     font-style: italic;
@@ -331,7 +315,7 @@ a:active {
     transition: transform 0.50s ease, opacity 0.50s ease, box-shadow 0.60s ease;
     cursor: pointer;
 }
- 
+
 .stream-images:hover {
     transform: scale(1.10);
     border-color: gold;
@@ -350,4 +334,31 @@ a:active {
 
 .it {
     width: 30vw;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+
+@keyframes fadeInFromBottom {
+    0% {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-on-scroll {
+    animation: fadeInFromBottom 1s ease-out forwards;
+    opacity: 0;
+}
+
+.sectionnametwo {
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
 }
