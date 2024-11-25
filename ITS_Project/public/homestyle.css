@@ -331,7 +331,7 @@ a:active {
     transition: transform 0.50s ease, opacity 0.50s ease, box-shadow 0.60s ease;
     cursor: pointer;
 }
-
+ 
 .stream-images:hover {
     transform: scale(1.10);
     border-color: gold;
