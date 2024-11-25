@@ -264,6 +264,51 @@ hr {
 
 }
 
+
+a {
+    text-decoration: none;
+    color: inherit;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+a:active {
+    animation: clickAnimation 0.2s ease;
+}
+
+@keyframes clickAnimation {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    50% {
+        transform: scale(1.20);
+        opacity: 0.7;
+    }
+
+    100% {
+        transform: scale(1.20);
+        opacity: 1;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .streamhead {
     color: #06b700;
     font-style: italic;
@@ -305,32 +350,4 @@ hr {
 
 .it {
     width: 30vw;
-}
-
-a {
-    text-decoration: none;
-    color: inherit;
-    position: relative;
-    transition: color 0.3s ease;
-}
-
-a:active {
-    animation: clickAnimation 0.2s ease;
-}
-
-@keyframes clickAnimation {
-    0% {
-        transform: scale(1);
-        opacity: 1;
-    }
-
-    50% {
-        transform: scale(1.20);
-        opacity: 0.7;
-    }
-
-    100% {
-        transform: scale(1.20);
-        opacity: 1;
-    }
 }
