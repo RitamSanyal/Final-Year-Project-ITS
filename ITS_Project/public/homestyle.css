@@ -70,15 +70,14 @@
 }
 
 .sectiononeimages {
-    transition: transform 0.50s ease, opacity 0.50s ease, box-shadow 1.00s ease;
+    transition: transform 0.50s ease, opacity 0.50s ease, box-shadow 0.60s ease;
     cursor: pointer;
 }
 
 .sectiononeimages:hover {
-    transform: scale(1.05);
-    opacity: 0.6;
+    transform: scale(1.03);
+    opacity: 1.5;
     box-shadow: 5px 10px 20px 20px rgba(255, 255, 0, 0.95);
-
 }
 
 a {
@@ -103,12 +102,14 @@ a {
     border: solid;
     border-radius: 2rem;
     padding: 30px;
+    border-color: white;
 }
 
 .three {
     border: solid;
     border-radius: 2rem;
     padding: 20px;
+    border-color: white;
 }
 
 .middlesection {
@@ -273,7 +274,7 @@ a {
 }
 
 a:active {
-    animation: clickAnimation 0.2s ease;
+    animation: clickAnimation 1.70s ease;
 }
 
 @keyframes clickAnimation {
@@ -386,29 +387,4 @@ html {
 
 .yourjourney {
     animation: boxShadowBlink 1.40s infinite;
-    text-decoration: none;
-    color: inherit;
-    position: relative;
-    transition: color 0.3s ease;
-}
-
-a:active {
-    animation: clickAnimation 0.2s ease;
-}
-
-@keyframes clickAnimation {
-    0% {
-        transform: scale(1);
-        opacity: 1;
-    }
-
-    50% {
-        transform: scale(1.20);
-        opacity: 0.7;
-    }
-
-    100% {
-        transform: scale(1.20);
-        opacity: 1;
-    }
 }
