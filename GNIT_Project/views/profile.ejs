@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Profile Page</title>
+    <link rel=" stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <style>
+        .card {
+            text-align: center;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 10%;
+        }
+
+        .logout:hover {
+            background-color: rgba(255, 217, 0, 0.79);
+        }
+
+        .delete:hover {
+            background-color: rgba(255, 0, 0, 0.676);
+        }
+
+        .Quiz {
+            color: rgb(0, 194, 26);
+            border-color: rgb(5, 214, 54);
+        }
+
+        .Quiz:hover {
+            color: white;
+            background-color: rgb(104, 171, 4);
+        }
+
+        .welcome {
+            font-family: cursive;
+            color: rgb(80, 79, 79);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container mt-5">
+        <div class="card mx-auto shadow-lg" style="max-width: 500px;">
+            <div class="card-body text-center">
+                <h3 class="card-title mb-4 welcome"><i class="fa-regular fa-user"></i> Welcome,<b>
+                        <%= user.username %>!
+                    </b></h3>
+                <hr>
+                <p class="text-muted"> <i class="fa-regular fa-address-card"></i> Here is your current profile
+                    information:</p>
+
+                <h5 class="text-primary"><i class="fa-solid fa-graduation-cap"></i> Current Stream</h5>
+                <p class="lead mb-4">
+                    <b>
+                        <%= streamChoice %>
+                    </b>
+                </p>
+
+                <div class="d-grid gap-2 d-sm-flex justify-content-center">
+                    <a href="/logout" class="btn btn-warning logout"><i class="fa-solid fa-user-minus"></i> Logout</a>
+                    <a href="/update-stream" class="btn btn-outline-primary UpdateStream"><i
+                            class="fa-regular fa-pen-to-square"></i> Update Stream</a>
+                    <a href="/mcq-quiz" class="btn btn-outline-primary Quiz"> <i class="fa-solid fa-brain"></i>
+                        Quiz</a>
+                    <button class="btn btn-danger delete" data-bs-toggle="modal" data-bs-target="#deleteAccountModal"><i
+                            class="fa-solid fa-trash-can"></i> Delete
+                        Account</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Delete Account Confirmation -->
+    <div class="modal fade" id="deleteAccountModal" tabindex="-1" aria-labelledby="deleteAccountModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteAccountModalLabel">Confirm Account Deletion</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>This action cannot be undone. Please type <strong>"confirm"</strong> to delete your account:</p>
+                    <input type="text" id="confirmationInput" class="form-control"
+                        placeholder="Type 'confirm' to delete">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button id="confirmDeleteButton" type="button" class="btn btn-danger" disabled>Delete
+                        Account</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <script>
+        // Enable the delete button only when the correct confirmation text is entered
+        const confirmationInput = document.getElementById('confirmationInput');
+        const confirmDeleteButton = document.getElementById('confirmDeleteButton');
+
+        confirmationInput.addEventListener('input', () => {
+            confirmDeleteButton.disabled = confirmationInput.value !== 'confirm';
+        });
+
+        confirmDeleteButton.addEventListener('click', async () => {
+            try {
+                const response = await fetch('/delete-user', { method: 'DELETE' });
+                const data = await response.json();
+
+                if (response.ok) {
+                    alert(data.message);
+                    window.location.href = '/'; // Redirect to homepage after deletion
+                } else {
+                    alert(data.error || 'Failed to delete account');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('An error occurred while deleting the account.');
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report Card</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            padding: 20px;
+            background-color: #f1f3f6;
+        }
+
+        .report-card {
+            border: 1px solid #000;
+            padding: 20px;
+            background-color: #fff;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .report-card h4 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .card {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #fff;
+            margin-bottom: 20px;
+        }
+
+        .card-header {
+            background-color: #f8f9fa;
+            padding: 15px;
+            font-weight: bold;
+        }
+
+        .card-body {
+            padding: 15px;
+        }
+
+        .card-footer {
+            background-color: #f8f9fa;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .card-footer a {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .card-footer a:hover {
+            text-decoration: underline;
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+            max-width: 100%;
+            margin-bottom: 10px;
+            background-color: #000;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .list-group-item {
+            padding: 0;
+        }
+
+        /* Responsive Layout */
+        @media (max-width: 768px) {
+            .card-columns {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 1.5rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .card-columns {
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+        }
+
+        .logout:hover {
+            background-color: #e8e400;
+        }
+
+        .Profile {
+            background-color: #27e800;
+        }
+
+        .Profile:hover {
+            background-color: #aefe9d;
+        }
+    </style>
+</head>
+
+<body>
+    <a href="/logout" class="btn btn-warning logout mb-3"><i class="fa-solid fa-user-minus"></i> Logout</a>
+    <a href="/profile" class="btn btn-warning Profile mb-3"><i class="fa-solid fa-user-minus"></i> Profile</a>
+
+    <div class="report-card">
+        <h4><b>Your Report Card</b></h4>
+        <hr>
+
+        <div class="mb-3">
+            <b>Stream: </b> <label class="form-label">
+                <%= suggestionData.user_level_sheet.Stream %>
+            </label>
+        </div>
+
+        <div class="mb-3">
+            <b>Total No of Questions: </b> <label class="form-label">
+                <%= suggestionData.user_level_sheet.total_question %>
+            </label>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <b>Right Answer:</b> <label class="form-label">
+                        <%= suggestionData.user_level_sheet.total_right %>
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <b>Wrong Answer:</b> <label class="form-label">
+                        <%= suggestionData.user_level_sheet.total_wrong %>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label"><b>Questions Level You Answered(Right):</b></label>
+            <div class="row">
+                <div class="col-md-4">
+                    Easy: <label for="easy" class="form-label">
+                        <%= suggestionData.user_level_sheet.easy.right %>
+                    </label>
+                </div>
+                <div class="col-md-4">
+                    Medium: <label for="medium" class="form-label">
+                        <%= suggestionData.user_level_sheet.medium.right %>
+                    </label>
+                </div>
+                <div class="col-md-4">
+                    Hard: <label for="hard" class="form-label">
+                        <%= suggestionData.user_level_sheet.hard.right %>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <hr>
+            <label class="form-label"><b>Congratulations!!</b> You Have Unlocked Our Suggestion List:</label>
+        </div>
+
+        <!-- Suggested Courses Section (Card View) -->
+        <div class="row card-columns">
+            <% suggestionData.suggestion.forEach((suggestion)=> { %>
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Difficulty: <%= suggestion.Difficulty %>
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-unstyled">
+                                <% suggestion.Courses.forEach((course)=> { %>
+                                    <li>
+                                        <h6 class="card-title">
+                                            <%= course.CourseName %>
+                                        </h6>
+                                        <div class="video-container">
+                                            <!-- Extract video ID from YouTube URL -->
+                                            <% const youtubeUrl=course.CourseVideoLink; const
+                                                youtubeRegex=/(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/?)([\w-]+))(?:[?&][^#\n]*)?|(?:youtu\.be\/)([\w-]+)/;
+                                                const matches=youtubeUrl.match(youtubeRegex); const videoId=matches ?
+                                                matches[1] || matches[2] : '' ; %>
+                                                <iframe src="https://www.youtube.com/embed/<%= videoId %>"
+                                                    frameborder="0"
+                                                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                                    allowfullscreen>
+                                                </iframe>
+                                        </div>
+
+                                        <div class="card-footer">
+                                            <a href="<%= course.CourseLink %>" target="_blank">Go to Website</a>
+                                        </div>
+                                        <div class="card-footer">
+                                            <a href="<%= course.CourseVideoLink %>" target="_blank">Watch Video</a>
+                                        </div>
+                                    </li>
+                                    <% }) %>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <% }) %>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
